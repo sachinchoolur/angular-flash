@@ -4,7 +4,7 @@ angular-flash
 
 Demo
 ----------------
-[angular-flash](http://sachinchoolur.github.io/angular-flash/)
+[angular-flash](http://sachinchoolur.github.io/angular-flash/),  [jsfiddle](http://jsfiddle.net/sachin377/1azz4xya/)
 
 
 
