@@ -4,7 +4,7 @@ angular-flash
 
 Demo
 ----------------
-[angular-flash](http://sachinchoolur.github.io/lightslider/)
+[angular-flash](http://sachinchoolur.github.io/angular-flash/)
 
 
 
