@@ -436,3 +436,122 @@ Small Device Styles
 .mRb15{
   margin-bottom: 15px !important;
 }
+
+
+.prettyprint{
+    background: none repeat scroll 0 0 #fafafa !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+
+/*/ Demo */
+
+
+.listDemo {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.listDemo li, .listDemo .newList {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    margin: 0;
+    padding: 12px 20px;
+    color: #555;
+    position: relative;
+}
+.listDemo a {
+    font-size: 13px;
+    margin-left: 5px;
+}
+.listDemo .action {
+    margin-left: 10px;
+    position: absolute;
+    right: 15px;
+}
+.listDemo input {
+    border: medium none;
+    box-shadow: none;
+    display: inline;
+    font-size: 16px;
+    height: 21px;
+    width: 100%;
+    padding: 0px;
+}
+.form-control::-moz-placeholder {
+    color: #aaa;
+    line-height: 1.5;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: #aaa;
+    line-height: 1.5;
+}
+.form-control::-webkit-input-placeholder {
+    color: #aaa;
+    line-height: 1.5;
+}
+.form-control:focus {
+    border-color: #bcbcbc;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0 none;
+}
+a[disabled] {
+    background-color: #eee;
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+.listDemoCont {
+    background: none repeat scroll 0 0 #fafafa;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 520px;
+}
+.listDemo li:first-child {
+    border-top: 0 none;
+}
+
+
+/*/ customAlert */
+.alert.customAlert {
+    background-color: #fafafa;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #666;
+    min-width: 403px;
+    padding : 20px 50px 20px 30px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 9999;
+    height: 92px;
+}
+
+.customAlert strong {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.customAlert .close {
+    position: absolute !important;
+    right: 15px !important;
+    top: 5px !important;
+}
+.customAlert em {
+    color: #999;
+    display: inline-block;
+    margin: 0 5px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: pre;
+}
+.listAddCont .action{
+    top: 13px;
+}
