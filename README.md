@@ -1,5 +1,5 @@
 ![license](https://img.shields.io/npm/l/angular-flash-alert.svg)
-![travis](https://travis-ci.org/sachinchoolur/angular-flash.svg)
+![travis](https://api.travis-ci.com/sachinchoolur/angular-flash-alert.svg?token=YeaTxT5qNyiMS8zTsaCg&branch=master)
 ![bower](https://img.shields.io/bower/v/angular-flash-alert.svg)
 ![npm](https://img.shields.io/npm/v/angular-flash-alert.svg)
 # angular-flash 
