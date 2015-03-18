@@ -74,6 +74,6 @@ Flash.pause();
 Flash.dismiss()
 // Dismiss the flash
 ```
-#### [guidelines for contributors](https://github.com/sachinchoolur/angular-flash-alert/blob/master/contributing.md)
+#### [guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
 
 #### MIT © [Sachin](https://twitter.com/sachinchoolur)
