@@ -28,7 +28,7 @@
     // Directive for closing the flash message
     app.directive('closeFlash', function($compile, Flash) {
         return {
-            link: function(scope, ele, attrs) {
+            link: function(scope, ele) {
                 ele.on('click', function() {
                     Flash.dismiss();
                 });
@@ -52,45 +52,31 @@
         function($rootScope, $timeout) {
 
             var dataFactory = {},
-                num = 0,
-                timeOut,
-                canceled = false;
-
+                timeOut;
 
             // Create flash message
             dataFactory.create = function(type, text, addClass) {
+                var $this = this;
+                $timeout.cancel(timeOut);
                 $rootScope.flash.type = type;
                 $rootScope.flash.text = text;
                 $rootScope.flash.addClass = addClass;
-                canceled = false;
                 $timeout(function() {
                     $rootScope.hasFlash = true;
                 }, 100);
-                num++;
                 timeOut = $timeout(function() {
-                    if (canceled === false) {
-                        if (num == 1) {
-                            $timeout(function() {
-                                $rootScope.hasFlash = false;
-                            });
-                        }
-                        num--;
-                    }
+                    $this.dismiss();
                 }, $rootScope.flash.timeout);
             };
 
             // Cancel flashmessage timeout function
             dataFactory.pause = function() {
-                num = 0;
                 $timeout.cancel(timeOut);
-                canceled = true;
             };
 
             // Dismiss flash message
             dataFactory.dismiss = function() {
                 $timeout.cancel(timeOut);
-                canceled = true;
-                num = 0;
                 $timeout(function() {
                     $rootScope.hasFlash = false;
                 });

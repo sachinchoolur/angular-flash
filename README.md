@@ -1,5 +1,8 @@
-angular-flash 
-=============
+![license](https://img.shields.io/npm/l/angular-flash-alert.svg)
+![travis](https://travis-ci.org/sachinchoolur/angular-flash.svg?branch=master)
+![bower](https://img.shields.io/bower/v/angular-flash-alert.svg)
+![npm](https://img.shields.io/npm/v/angular-flash-alert.svg)
+# angular-flash 
 
 
 Demo
@@ -8,7 +11,23 @@ Demo
 
 
 
-#### How to use angular-flash? ####
+How to use 
+---
+#### Bower
+
+You can Install angular-flash using the [Bower](http://bower.io) package manager.
+
+```sh
+$ bower install angular-flash-alert --save
+```
+
+#### npm
+
+You can also find angular-flash on [npm](http://npmjs.org)
+
+```sh
+$ npm install angular-flash-alert
+```
 
 Add the Following code to the &lt;head&gt; of your document.
 ```html
@@ -34,7 +53,7 @@ Inject the `Flash` factory in your controller
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
     $scope.successAlert = function () {
         var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-        Flash.add('success', message, 'custom-class');
+        Flash.create('success', message, 'custom-class');
         // First argument (success) is the type of the flash alert
         // Second argument (message) is the message displays in the flash alert
         // you can inclide html as message (not just text)
@@ -55,3 +74,6 @@ Flash.pause();
 Flash.dismiss()
 // Dismiss the flash
 ```
+#### [guidelines for contributors](https://github.com/sachinchoolur/angular-flash-alert/blob/master/contributing.md)
+
+#### MIT © [Sachin](https://twitter.com/sachinchoolur)
