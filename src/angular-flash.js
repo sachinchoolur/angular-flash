@@ -5,7 +5,7 @@
     app.run(function($rootScope) {
         // initialize variables
         $rootScope.flash = {};
-        $rootScope.flash.text = '';
+        $rootScope.flash.text = ''; 
         $rootScope.flash.type = '';
         $rootScope.flash.timeout = 5000;
         $rootScope.hasFlash = false;
