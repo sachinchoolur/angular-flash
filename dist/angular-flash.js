@@ -1,21 +1,21 @@
-/*! angular-flash - v1.0.0 - 2015-03-18
+/*! angular-flash - v1.0.0 - 2015-03-19
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2015 Sachin; Licensed MIT */
 (function() {
     'use strict';
     var app = angular.module('flash', []);
 
-    app.run(function($rootScope) {
+    app.run(['$rootScope', function($rootScope) {
         // initialize variables
         $rootScope.flash = {};
         $rootScope.flash.text = '';
         $rootScope.flash.type = '';
         $rootScope.flash.timeout = 5000;
         $rootScope.hasFlash = false;
-    });
+    }]);
 
     // Directive for compiling dynamic html
-    app.directive('dynamic', function($compile) {
+    app.directive('dynamic', ['$compile', function($compile) {
         return {
             restrict: 'A',
             replace: true,
@@ -26,10 +26,10 @@
                 });
             }
         };
-    });
+    }]);
 
     // Directive for closing the flash message
-    app.directive('closeFlash', function($compile, Flash) {
+    app.directive('closeFlash', ['$compile', 'Flash', function($compile, Flash) {
         return {
             link: function(scope, ele) {
                 ele.on('click', function() {
@@ -37,10 +37,10 @@
                 });
             }
         };
-    });
+    }]);
 
     // Create flashMessage directive
-    app.directive('flashMessage', function($compile, $rootScope) {
+    app.directive('flashMessage', ['$compile', '$rootScope', function($compile, $rootScope) {
         return {
             restrict: 'A',
             template: '<div role="alert" ng-show="hasFlash" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible ng-hide alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div>',
@@ -49,7 +49,7 @@
                 $rootScope.flash.timeout = parseInt(attrs.flashMessage, 10);
             }
         };
-    });
+    }]);
 
     app.factory('Flash', ['$rootScope', '$timeout',
         function($rootScope, $timeout) {
