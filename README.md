@@ -3,6 +3,7 @@
 ![bower](https://img.shields.io/bower/v/angular-flash-alert.svg)
 ![npm](https://img.shields.io/npm/v/angular-flash-alert.svg)
 # angular-flash 
+A simple lightweight flash message module for angularjs.﻿
 
 
 Demo
