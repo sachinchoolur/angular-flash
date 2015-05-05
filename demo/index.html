@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Angular-flash : Flash message for angularjs">
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/prettify.css">
+
+    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../src/angular-flash.css">
+
+    <title>Angular-flash</title>
+</head>
+
+<body ng-controller="FlashDemoCtrl">
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+            <a id="forkme_banner" href="https://github.com/sachinchoolur/angular-flash">View on GitHub</a>
+
+            <h1 id="project_title">Angular-flash</h1>
+            <h2 id="project_tagline">Flash message for angularjs</h2>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://sachinchoolur.github.io/angular-flash/" data-text="Flash message for #AngularJS" data-via="sachinchoolur" data-count="none" data-hashtags="javascript">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/sachinchoolur" class="twitter-follow-button" data-show-count="false">Follow @sachinchoolur</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<iframe src="https://ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+
+            <section id="downloads">
+                <a class="zip_download_link" href="https://github.com/sachinchoolur/angular-flash/zipball/master">Download this project as a .zip file</a>
+                <a class="tar_download_link" href="https://github.com/sachinchoolur/angular-flash/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+        <section id="main_content" class="inner">
+            <div class="section">
+                <h3><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h3>
+                <p>Flash message for angularjs</p>
+                <div flash-message="5000" ></div>
+                <button class="btn btn-success" ng-click="success()">Success</button>
+                <button class="btn btn-info" ng-click="info()">Info</button>
+                <button class="btn btn-warning" ng-click="warning()">Warning</button>
+                <button class="btn btn-danger" ng-click="danger()">Danger</button>
+                <button class="btn btn-primary"  ng-disabled="hasFlash == false;" ng-click="pause()">Pause</button>
+            </div>
+            <div class="section">
+                <h3><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Another Demo</h3>
+                <div class="listDemoCont">
+                    <ul class="listDemo">
+                        <li ng-repeat="list in lists | orderBy:'createdOn'">
+                            <div class="listCont">
+                                {{list.content}}
+                                <span class="action">
+                                    <a href="" ng-click="delete(list)">Delete</a>
+                                </span>
+                            </div>
+                        </li>
+                        <div class="newList">
+                            <div class="listAddCont">
+                                <input id="newList" placeholder="Add new list" autofocus class="form-control" type="text" ng-model="newList">
+                                <span class="action">
+                                    <a href="" ng-disabled="!newList.length" ng-click="add(newList);">add</a>
+                                </span>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="section">
+                <h3>
+    <a id="howToUse" class="anchor" href="#howToUse" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use angular-flash?</h3>
+                <p>Add the Following code to the <head> of your document.</p>
+                <pre class="prettyprint linenums">
+&lt;link type="text/css" rel="stylesheet" href="css/angular-flash.min.css" /&gt;
+// If you are using bootstrap v3 no need to include angular-flash.css
+&lt;script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="angular-flash.min.js"&gt;&lt;/script&gt;
+// Do not include both angular-flash.js and angular-flash.min.js
+    </pre>
+            <p>Add <span class="atv">flash</span> dependency to your module</p>
+            <pre class="prettyprint linenums">
+var myApp = angular.module("app", ["flash"]);</pre>
+            <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span><span class="pun">=</span><span class="atv">"5000"</span></span> directive in your html template.</p>
+            <pre class="prettyprint linenums">
+&lt;div flash-message="5000" &gt;&lt;/div&gt; 
+// 5000 milli-secs is the display duration.
+// Flash alert will be automatically dismissed after 5000 milli-secs.</pre>
+            <p>Inject the <span class="atv">Flash</span> factory in your controller</p>
+<pre class="prettyprint linenums">
+myApp.controller('demoCtrl', ['Flash', function(Flash) {
+  $scope.successAlert = function () {
+    var message = '&lt;strong&gt; Well done!&lt;/strong&gt;  You successfully read this important alert message.';
+    Flash.create('success', message, 'custom-class');
+    // First argument (success) is the type of the flash alert
+    // Second argument (message) is the message displays in the flash alert
+    // You can inclide html as message (not just text)
+    // Third argument (custom-class) is the custom class for the perticular flash alert
+  }
+}]);</pre>
+
+            </div>
+            <div class="section">
+            <h3><a id="type" class="anchor" href="#type" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flash alert types</h3>
+              <ul>
+                <li>success</li>
+                <li>info</li>
+                <li>warning</li>
+                <li>danger</li>
+              </ul>
+            </div>
+
+            <div class="section">
+            <h3><a id="method" class="anchor" href="#method" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h3>
+            <pre class="prettyprint linenums">
+Flash.pause()
+// Pause flash auto dismiss.
+Flash.dismiss()
+// Dismiss the flash</pre>
+            </div>
+
+            <div class="section">
+            <h3><a id="bootstrap" class="anchor" href="#bootstrap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bootstrap</h3>
+            <p>Angular-flash is fully compatible with twitter bootstrap. It uses standard bootstrap classes. If bootstrap css is already included in your document then no need to include angular-flash.css in your document</p>
+            </div>
+
+            <div class="section">
+            <h3><a id="ngAnimate" class="anchor" href="#ngAnimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>ngAnimate</h3>
+            <p>If you want animations include ngAnimate module. you can use inbuilt classes <span class="atv">.alertIn</span> and <span class="atv">.alertOut</span> for applying css</p>
+<pre class="prettyprint linenums mRb15">
+var myApp = angular.module("app", ["flash", "ngAnimate"]);
+</pre>
+<pre class="prettyprint linenums">
+.alertIn, .alertOut {...}
+.alertIn.ng-hide-remove, .alertOut.ng-hide-add.ng-hide-add-active {...}
+.alertOut.ng-hide-add, .alertIn.ng-hide-remove.ng-hide-remove-active {...}
+</pre>
+            </div>
+            <div class="section">
+                <h3><a id="Codepen" class="anchor" href="#Codepen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit on Codepen</h3>
+<p data-height="288" data-theme-id="0" data-slug-hash="vEyyjZ" data-default-tab="result" data-user="sachinchoolur" class='codepen'>See the Pen <a href='http://codepen.io/sachinchoolur/pen/vEyyjZ/'>Flash message for AngularJS</a> by Sachin choolur (<a href='http://codepen.io/sachinchoolur'>@sachinchoolur</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+            </div>
+            <div class="section">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- flash-footer -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2888290830590449"
+     data-ad-slot="8352543813"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+            <div class="section">
+                <h3><a id="type" class="anchor" href="#like" aria-hidden="true"><span class="octicon octicon-link"></span></a>Like angular-flash? you may also like</h3>
+                  <ul>
+                    <li><a href="https://github.com/sachinchoolur/lightGallery">LightGallery</a></li>
+                    <li><a href="https://github.com/sachinchoolur/lightslider">lightSlider</a></li>
+                    <li><a href="https://github.com/sachinchoolur/ladda-angular">Lada-angular</a></li>
+                  </ul>
+            </div>
+            <div class="section">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://sachinchoolur.github.io/angular-flash/" data-text="Flash message for #AngularJS" data-via="sachinchoolur" data-count="none" data-hashtags="javascript">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/sachinchoolur" class="twitter-follow-button" data-show-count="false">Follow @sachinchoolur</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<iframe src="https://ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="../src/angular-flash.js"></script>
+    <script type="text/javascript" src="javascripts/prettify.js"></script>
+    <script type="text/javascript">
+        window.prettyPrint && prettyPrint()
+    </script>
+
+
+</body>
+
+</html>
