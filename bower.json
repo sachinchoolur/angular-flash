@@ -6,7 +6,7 @@
         "Sachin N <sachi77n@gmail.com>"
     ],
     "description": "Flash message for angularjs",
-    "main": "dist/angular-flash.js",
+    "main": ["dist/angular-flash.js", "dist/angular-flash.css"],
     "keywords": [
         "angular-flash",
         "flash",
