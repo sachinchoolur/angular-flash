@@ -86,21 +86,21 @@ app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', fu
         $scope.lists.push($scope.lastAdded);
         $scope.newList = '';
         var message = "<strong>List Created!</strong> The list <em>" + $scope.lastAdded.content + "</em> has been created. <a ng-click='undoAdd();' href=''>Undo</a>";
-        Flash.create('danger', message, 'customAlert');
+        Flash.create('danger', message, 0, 'customAlert');
     };
 
     $scope.delete = function (item) {
         $scope.deletedItem = item;
         $scope.lists.splice($scope.lists.indexOf(item), 1);
         var message = "<strong>List Deleted!</strong> The list <em>" + $scope.deletedItem.content + "</em> has been deleted. <a ng-click='undoDelete();' href=''>Undo</a>";
-        Flash.create('danger', message, 'customAlert');
+        Flash.create('danger', message, 0, 'customAlert');
     };
 
     $scope.undoAdd = function () {
         $scope.deletedItem = $scope.lastAdded;
         $scope.lists.splice($scope.lists.indexOf($scope.lastAdded), 1);
         var message = "<strong>List Deleted!</strong> The list <em>" + $scope.deletedItem.content + "</em> has been deleted.";
-        Flash.create('danger', message, 'customAlert');
+        Flash.create('danger', message, 0, 'customAlert');
     };
 
     $scope.undoDelete = function () {

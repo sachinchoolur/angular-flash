@@ -1,46 +1,63 @@
 {
-    "name": "angular-flash-alert",
-    "version": "1.1.1",
-    "description": "Flash message for angularjs",
-    "keywords": [
-        "angular-flash",
-        "flash",
-        "message",
-        "alert",
-        "angularjs",
-        "bootstrap"
-    ],
-    "homepage": "https://github.com/sachinchoolur/angular-flash",
-    "bugs": {
-        "url": "https://github.com/sachinchoolur/angular-flash/issues",
-        "email": "sachi77n@gmail.com"
-    },
-    "author": {
-        "name": "Sachin",
-        "email": "sachi77n@gmail.com",
-        "url": "https://github.com/sachinchoolur"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:sachinchoolur/angular-flash.git"
-    },
-    "main": "dist/angular-flash.js",
-    "license": "MIT",
-    "scripts": {
-        "test": "grunt"
-    },
-    "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-clean": "^0.6.0",
-        "grunt-contrib-concat": "^0.5.0",
-        "grunt-contrib-connect": "^0.9.0",
-        "grunt-contrib-jshint": "^0.10.0",
-        "grunt-contrib-qunit": "^0.5.1",
-        "grunt-contrib-uglify": "^0.7.0",
-        "grunt-contrib-cssmin": "^0.12.1",
-        "grunt-contrib-watch": "^0.6.1",
-        "jshint-stylish": "^1.0.0",
-        "load-grunt-tasks": "^2.0.0",
-        "time-grunt": "^1.0.0"
+  "name": "angular-flash-alert",
+  "version": "2.0.0",
+  "description": "Flash message for AngularJS and Bootstrap",
+  "keywords": [
+    "angular-flash",
+    "flash",
+    "message",
+    "alert",
+    "angularjs",
+    "bootstrap"
+  ],
+  "homepage": "https://github.com/sachinchoolur/angular-flash",
+  "bugs": {
+    "url": "https://github.com/sachinchoolur/angular-flash/issues",
+    "email": "sachi77n@gmail.com"
+  },
+  "author": {
+    "name": "Sachin",
+    "email": "sachi77n@gmail.com",
+    "url": "https://github.com/sachinchoolur"
+  },
+  "contributos": [
+    {
+      "name": "Roope Hakulinen",
+      "email": "roope.hakulinen@gmail.com",
+      "url": "https://github.com/RoopeHakulinen"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sachinchoolur/angular-flash.git"
+  },
+  "main": "dist/angular-flash.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "grunt"
+  },
+  "dependencies": {
+    "angular": "^1.4.8"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.8",
+    "babel-preset-es2015": "^6.3.13",
+    "grunt": "^0.4.5",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-cssmin": "^0.12.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jasmine-core": "^2.4.1",
+    "jshint-stylish": "^1.0.0",
+    "karma": "^0.13.19",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.6",
+    "load-grunt-tasks": "^2.0.0",
+    "time-grunt": "^1.0.0"
+  }
 }

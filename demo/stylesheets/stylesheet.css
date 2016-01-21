@@ -425,11 +425,6 @@ Small Device Styles
   }
 
 }
-.alert {
-    position: absolute;
-    right: 0;
-    top: 42px;
-}
 .btn{
   margin-right: 20px;
 }
