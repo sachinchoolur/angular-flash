@@ -1,4 +1,4 @@
-/*! angular-flash - v2.0.0 - 2016-01-21
+/*! angular-flash - v2.0.0 - 2016-02-01
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 'use strict';
@@ -29,10 +29,9 @@ app.directive('dynamic', ['$compile', function ($compile) {
 app.directive('closeFlash', ['$compile', '$rootScope', 'Flash', function ($compile, $rootScope, Flash) {
     return {
         link: function link(scope, ele, attrs) {
-            var index = undefined;
-            index = parseInt(attrs.closeFlash, 10);
             return ele.on('click', function () {
-                Flash.dismiss(index);
+                var id = parseInt(attrs.closeFlash, 10);
+                Flash.dismiss(id);
                 $rootScope.$apply();
             });
         }
@@ -45,7 +44,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
         scope: {
             duration: '=duration'
         },
-        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash="{{$index}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div></div>',
+        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div></div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
         }
@@ -54,6 +53,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
 
 app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
     var dataFactory = {};
+    var counter = 0;
     dataFactory.setDefaultTimeout = function (timeout) {
         dataFactory.defaultTimeout = timeout;
     };
@@ -67,18 +67,19 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
         flash = {
             type: type,
             text: text,
-            addClass: addClass
+            addClass: addClass,
+            id: counter++
         };
-        if (dataFactory.defaultTimeout && (typeof timeout === 'undefined' || timeout === 0)) {
+        if (dataFactory.defaultTimeout && typeof timeout === 'undefined') {
             flash.timeout = dataFactory.defaultTimeout;
         } else if (timeout) {
             flash.timeout = timeout;
         }
         $rootScope.flashes.push(flash);
         if (flash.timeout) {
-            flash.timeoutObj = $timeout(function () {
-                $this.dismiss($rootScope.flashes.length - 1);
-            }, flash.timeout);
+            flash.timeoutObj = $timeout(function (id) {
+                $this.dismiss(id);
+            }, flash.timeout, true, flash.id);
         }
     };
     dataFactory.pause = function (index) {
@@ -86,10 +87,13 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
             $timeout.cancel($rootScope.flashes[index].timeoutObj);
         }
     };
-    dataFactory.dismiss = function (index) {
-        dataFactory.pause(index);
-        $rootScope.flashes.splice(index, 1);
-        $rootScope.$digest();
+    dataFactory.dismiss = function (id) {
+        var index = findIndexById(id);
+        if (index !== -1) {
+            dataFactory.pause(index);
+            $rootScope.flashes.splice(index, 1);
+            $rootScope.$digest();
+        }
     };
     dataFactory.clear = function () {
         while ($rootScope.flashes.length > 0) {
@@ -97,6 +101,11 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
         }
     };
     dataFactory.reset = dataFactory.clear;
+    function findIndexById(id) {
+        return $rootScope.flashes.findIndex(function (flash) {
+            return flash.id === id;
+        });
+    }
     return dataFactory;
 }]);
 //# sourceMappingURL=angular-flash.js.map
