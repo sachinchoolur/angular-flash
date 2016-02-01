@@ -3,7 +3,7 @@
 ![bower](https://img.shields.io/bower/v/angular-flash-alert.svg)
 ![npm](https://img.shields.io/npm/v/angular-flash-alert.svg)
 # angular-flash 
-A simple lightweight flash message module for angularjs.﻿
+A simple lightweight flash message module for AngularJS and Bootstrap.﻿
 
 
 Demo
@@ -14,13 +14,6 @@ Demo
 
 How to use 
 ---
-#### Bower
-
-You can Install angular-flash using the [Bower](http://bower.io) package manager.
-
-```sh
-$ bower install angular-flash-alert --save
-```
 
 #### npm
 
@@ -30,23 +23,30 @@ You can also find angular-flash on [npm](http://npmjs.org)
 $ npm install angular-flash-alert
 ```
 
+#### Bower
+
+You can Install angular-flash using the [Bower](http://bower.io) package manager.
+
+```sh
+$ bower install angular-flash-alert --save
+```
+
 Add the Following code to the &lt;head&gt; of your document.
 ```html
-<link type="text/css" rel="stylesheet" href="css/angular-flash.min.css" />
+<link type="text/css" rel="stylesheet" href="dist/angular-flash.min.css" />
 // If you are using bootstrap v3 no need to include angular-flash.css
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-<script src="angular-flash.min.js"></script>
+<script src="dist/angular-flash.min.js"></script>
 // Do not include both angular-flash.js and angular-flash.min.js
 ```
-Add `flash` dependency to your module
+Add `ngFlash` dependency to your module
 ```javascript
-var myApp = angular.module("app", ["flash"])
+var myApp = angular.module("app", ["ngFlash"])
 ```
-Include `<div flash-message="5000" ></div>` directive in your html template.
+Include directive below in your HTML template.
 ```html
-<div flash-message="5000" ></div> 
-<!-- 5000 milli-secs is the display duration.
-     Flash alert will be automatically dismissed after 5000 milli-secs.
+<flash-message duration="5000"></flash-message> 
+<!-- 5000ms as the default duration to show flash message.
 -->
 ```
 Inject the `Flash` factory in your controller
@@ -54,27 +54,40 @@ Inject the `Flash` factory in your controller
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
     $scope.successAlert = function () {
         var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-        Flash.create('success', message, 'custom-class');
-        // First argument (success) is the type of the flash alert
-        // Second argument (message) is the message displays in the flash alert
-        // you can inclide html as message (not just text)
-        // Third argument (custom-class) is the custom class for the perticular flash alert
+        Flash.create('success', message, 0, 'custom-class');
+        // First argument is the type of the flash alert
+        // Second argument is the message displays in the flash alert (HTML ok)
+        // Third argument (optional) is the duration of showing the flash. 0 to not automatically hide flash (user needs to click the cross on top-right corner).
+        // Fourth argument (optional) is the custom class to be added for the flash message created
     }
 }]);
 ```
-####flash alert types####
+####Flash types####
 + success
 + info
 + warning
 + danger
 
 #### Methods ####
-``` javascript
-Flash.pause();
-// Pause flash auto dismiss.
-Flash.dismiss()
-// Dismiss the flash
-```
-#### [guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
+These methods are mostly for internal usage but can be used also from outside.
 
-#### MIT © [Sachin](https://twitter.com/sachinchoolur)
+``` javascript
+Flash.pause(4);
+// Pause the fifth flash' auto dismiss.
+Flash.dismiss(1);
+// Dismiss the second flash shown
+```
+#### [Guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
+
+#### Running tests
+```
+npm install
+./node_modules/karma/bin/karma start
+```
+
+#### Contributors
+* [Sachin Choluur](https://github.com/sachinchoolur) (Original author)
+* [Roope Hakulinen](https://github.com/RoopeHakulinen) (Version 2)
+
+#### License
+MIT © [Sachin Choluur](https://twitter.com/sachinchoolur)
