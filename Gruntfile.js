@@ -1,35 +1,44 @@
-'use strict';
 module.exports = function (grunt) {
+    'use strict';
     // Load all grunt tasks
     require('load-grunt-tasks')(grunt);
     // Show elapsed time at the end
     require('time-grunt')(grunt);
 
+    var distPath = 'dist/';
     // Project configuration.
     grunt.initConfig({
         // Metadata.
         pkg: grunt.file.readJSON('package.json'),
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['es2015']
+            },
+            dist: {
+                files: {
+                    'dist/angular-flash.js': 'src/angular-flash.js'
+                }
+            }
+        },
         banner: '/*! angular-flash - v<%= pkg.version %> - ' +
             '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
             '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed MIT */\n',
         // Task configuration.
-        clean: {
-            files: ['dist']
-        },
         concat: {
             options: {
                 banner: '<%= banner %>',
                 stripBanners: true
             },
             basic: {
-              src: ['src/angular-flash.js'],
-              dest: 'dist/angular-flash.js'
+              src: [distPath + 'angular-flash.js'],
+              dest: distPath + 'angular-flash.js'
             },
             extras: {
               src: ['src/angular-flash.css'],
-              dest: 'dist/angular-flash.css'
+              dest: distPath + 'angular-flash.css'
             }
         },
         uglify: {
@@ -37,26 +46,19 @@ module.exports = function (grunt) {
                 banner: '<%= banner %>'
             },
             dist: {
-                src: 'src/angular-flash.js',
-                dest: 'dist/angular-flash.min.js'
+                src: distPath + 'angular-flash.js',
+                dest: distPath + 'angular-flash.min.js'
             }
         },
         cssmin: {
             target: {
                 files: [{
                   expand: true,
-                  cwd: 'src',
-                  src: ['*.css', '!*.min.css'],
-                  dest: 'dist',
+                  cwd: '',
+                  src: [distPath + '*.css', '!*.min.css'],
+                  dest: '',
                   ext: '.min.css'
                 }]
-            }
-        },
-        qunit: {
-            all: {
-                options: {
-                    urls: ['http://localhost:9000/test/angular-flash.html']
-                }
             }
         },
         jshint: {
@@ -68,18 +70,6 @@ module.exports = function (grunt) {
                     jshintrc: '.jshintrc'
                 },
                 src: 'Gruntfile.js'
-            },
-            src: {
-                options: {
-                    jshintrc: 'src/.jshintrc'
-                },
-                src: ['src/**/*.js']
-            },
-            test: {
-                options: {
-                    jshintrc: 'test/.jshintrc'
-                },
-                src: ['test/**/*.js']
             }
         },
         watch: {
@@ -107,11 +97,8 @@ module.exports = function (grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'connect', 'qunit', 'clean', 'concat', 'uglify', 'cssmin']);
-    grunt.registerTask('server', function () {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
-    });
+    grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('default', ['babel', 'lint', 'connect', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('serve', ['connect', 'watch']);
-    grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
+    grunt.registerTask('test', ['lint', 'connect']);
 };
