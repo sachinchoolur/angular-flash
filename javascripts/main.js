@@ -31,7 +31,7 @@ $.fn.putCursorAtEnd = function () {
 
 
 // Demo controller
-var app = angular.module('demoApp', ['flash', 'ngAnimate']);
+var app = angular.module('demoApp', ['ngFlash', 'ngAnimate']);
 app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', function ($rootScope, $scope, Flash, $timeout) {
     $scope.success = function () {
         var message = '<strong>Well done!</strong> You successfully read this important alert message.';
