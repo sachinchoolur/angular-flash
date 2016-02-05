@@ -6,7 +6,7 @@ describe('Unit testing angular flash', function() {
         Flash;
 
     // Load the myApp module, which contains the directive
-    beforeEach(module('flash'));
+    beforeEach(module('ngFlash'));
 
     // Store references to $rootScope and $compile
     // so they are available to all tests in this describe block

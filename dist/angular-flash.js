@@ -1,13 +1,13 @@
-/*! angular-flash - v2.0.0 - 2016-02-01
+/*! angular-flash - v2.1.0 - 2016-02-05
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 'use strict';
 
-/*! angular-flash - v2.0.0 - 2016-01-17
+/*! angular-flash - v2.1.0 - 2016-02-05
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
-var app = angular.module('flash', []);
+var app = angular.module('ngFlash', []);
 
 app.run(['$rootScope', function ($rootScope) {
     return $rootScope.flashes = [];

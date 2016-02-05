@@ -1,8 +1,8 @@
-/*! angular-flash - v2.0.0 - 2016-01-17
+/*! angular-flash - v2.1.0 - 2016-02-05
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
-const app = angular.module('flash', []);
+const app = angular.module('ngFlash', []);
 
 app.run([
     '$rootScope', function($rootScope) {
