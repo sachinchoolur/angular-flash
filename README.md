@@ -8,7 +8,7 @@ A simple lightweight flash message module for AngularJS and Bootstrap.﻿
 
 Demo
 ----------------
-[angular-flash](http://sachinchoolur.github.io/angular-flash/) | [jsfiddle](http://jsfiddle.net/sachin377/1azz4xya/) | [codepen](http://codepen.io/sachinchoolur/pen/vEyyjZ)
+[angular-flash](http://sachinchoolur.github.io/angular-flash/) | [jsfiddle](http://jsfiddle.net/roopehakulinen/uxeg4nze/) | [codepen](http://codepen.io/RoopeHakulinen/pen/QyZjxm)
 
 
 
