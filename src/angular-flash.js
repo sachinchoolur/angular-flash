@@ -47,7 +47,7 @@ app.directive('flashMessage', [
                 duration: '=duration',
                 showClose: '=showClose'
             },
-            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
+            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
             link: function(scope, ele, attrs) {
                 Flash.setDefaultTimeout(scope.duration);
                 Flash.setShowClose(scope.showClose);
@@ -70,13 +70,13 @@ app.factory('Flash', [
             if (typeof value !== 'boolean') return;
             dataFactory.defaultShowClose = value;
         };
-        dataFactory.create = function(type, text, timeout, addClass, showClose) {
+        dataFactory.create = function(type, text, timeout, config, showClose) {
             let $this, flash;
             $this = this;
             flash = {
                 type: type,
                 text: text,
-                addClass: addClass,
+                config: config,
                 id: counter++
             };
             flash.showClose =

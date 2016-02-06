@@ -124,12 +124,12 @@ var myApp = angular.module("app", ["ngFlash"]);</pre>
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
   $scope.successAlert = function () {
     var message = '&lt;strong&gt; Well done!&lt;/strong&gt;  You successfully read this important alert message.';
-    Flash.create('success', message, 0, 'custom-class', true);
-    // First argument is the type of the flash alert.
-    // Second argument is the message displays in the flash alert (HTML is ok).
-    // Third argument (optional) is the duration of showing the flash. 0 to not automatically hide flash (user needs to click the cross on top-right corner).
-    // Fourth argument (optional) is the custom class to be added for the flash message created.
-    // Fifth argument (optional) is the visibility of close button for this flash.
+    Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+    // First argument (string) is the type of the flash alert.
+    // Second argument (string) is the message displays in the flash alert (HTML is ok).
+    // Third argument (number, optional) is the duration of showing the flash. 0 to not automatically hide flash (user needs to click the cross on top-right corner).
+    // Fourth argument (object, optional) is the custom class and id to be added for the flash message created.
+    // Fifth argument (boolean, optional) is the visibility of close button for this flash.
   }
 }]);</pre>
 

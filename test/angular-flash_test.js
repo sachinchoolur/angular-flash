@@ -29,10 +29,18 @@ describe('Unit testing Angular Flash', function() {
 
     it('has the class specified', function() {
         var testClassName = 'test-class';
-        Flash.create('success', 'Good job', 10000, testClassName);
+        Flash.create('success', 'Good job', 10000, {class: testClassName});
         $rootScope.$digest();
         var contents = node.contents()[0];
         expect(contents.querySelectorAll('.alert')[0].classList).toContain(testClassName);
+    });
+
+    it('has the id specified', function() {
+        var testIdName = 'test-id';
+        Flash.create('success', 'Good job', 10000, {id: testIdName});
+        $rootScope.$digest();
+        var contents = node.contents()[0];
+        expect(contents.querySelectorAll('.alert')[0].id).toContain(testIdName);
     });
 
     it('shows the flash when created and removes when deleted', function() {
