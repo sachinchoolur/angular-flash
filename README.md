@@ -35,7 +35,7 @@ Add the Following code to the &lt;head&gt; of your document.
 ```html
 <link type="text/css" rel="stylesheet" href="dist/angular-flash.min.css" />
 // If you are using bootstrap v3 no need to include angular-flash.css
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="dist/angular-flash.min.js"></script>
 // Do not include both angular-flash.js and angular-flash.min.js
 ```
@@ -45,8 +45,11 @@ var myApp = angular.module("app", ["ngFlash"])
 ```
 Include directive below in your HTML template.
 ```html
-<flash-message duration="5000" show-close="true"></flash-message> 
-<!-- 5000ms as the default duration to show flash message and show the close button (x on the right). 
+<flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash);"></flash-message> 
+<!-- 
+5000ms as the default duration to show flash message.
+Show the close button (x on the right).
+Call myCallback with flash dismissed as parameter when flash has been dismissed.
 -->
 ```
 Inject the `Flash` factory in your controller

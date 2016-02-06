@@ -117,8 +117,13 @@ var myApp = angular.module("app", ["ngFlash"]);</pre>
             <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span></span> directive in your
                 HTML.</p>
             <pre class="prettyprint linenums">
-&lt;flash-message duration="5000" show-close="true" &gt;&lt;/flash-message&gt;
-// 5000ms as the default duration to show flash message and show the close button (x on the right). </pre>
+                <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash);"></flash-message>
+
+&lt;flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" &gt;&lt;/flash-message&gt;
+// 5000ms as the default duration to show flash message.
+// Show the close button (x on the right).
+// Call myCallback with flash dismissed as parameter when flash has been dismissed.
+            </pre>
             <p>Inject the <span class="atv">Flash</span> factory in your controller</p>
 <pre class="prettyprint linenums">
 myApp.controller('demoCtrl', ['Flash', function(Flash) {

@@ -49,10 +49,9 @@ app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', fu
         var message = '<strong>Oh snap!</strong> Change a few things up and try submitting again.';
         Flash.create('danger', message);
     };
-    $scope.pause = function () {
-        Flash.pause();
+    $scope.myCallback = function(flash) {
+        console.log('Received flash: ' + JSON.stringify(flash));
     };
-
     function addMinutes(minutes) {
         var d1 = new Date(),
             d2 = new Date(d1);

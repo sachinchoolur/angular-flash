@@ -106,5 +106,18 @@ describe('Unit testing Angular Flash', function() {
             var contents = node.contents()[0];
             expect(contents.querySelectorAll('.close')[0].classList.contains('ng-hide')).toEqual(false);
         });
+    });
+
+    describe('dismiss callback', function() {
+        it('is called when dismissed', function() {
+            $rootScope.myCallback = function(flash) {
+            };
+            spyOn($rootScope, "myCallback");
+            node = $compile('<div><flash-message on-dismiss="myCallback(flash)"></flash-message></div>')($rootScope);
+            const id = Flash.create('success', 'All good');
+            Flash.dismiss(id);
+            $rootScope.$digest();
+            expect($rootScope.myCallback).toHaveBeenCalled();
+        });
     })
 });

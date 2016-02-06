@@ -42,13 +42,19 @@ app.directive('flashMessage', ['Flash', function (Flash) {
     return {
         restrict: 'E',
         scope: {
-            duration: '=duration',
-            showClose: '=showClose'
+            duration: '=',
+            showClose: '=',
+            onDismiss: '&'
         },
         template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
             Flash.setShowClose(scope.showClose);
+            function onDismiss(flash) {
+                if (typeof scope.onDismiss !== 'function') return;
+                scope.onDismiss({ flash: flash });
+            }
+            Flash.setOnDismiss(onDismiss);
         }
     };
 }]);
@@ -65,6 +71,10 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     dataFactory.setShowClose = function (value) {
         if (typeof value !== 'boolean') return;
         dataFactory.defaultShowClose = value;
+    };
+    dataFactory.setOnDismiss = function (callback) {
+        if (typeof callback !== 'function') return;
+        dataFactory.onDismiss = callback;
     };
     dataFactory.create = function (type, text, timeout, config, showClose) {
         var $this = undefined,
@@ -98,9 +108,13 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     dataFactory.dismiss = function (id) {
         var index = findIndexById(id);
         if (index !== -1) {
+            var flash = $rootScope.flashes[index];
             dataFactory.pause(index);
             $rootScope.flashes.splice(index, 1);
             $rootScope.$digest();
+            if (typeof dataFactory.onDismiss === 'function') {
+                dataFactory.onDismiss(flash);
+            }
         }
     };
     dataFactory.clear = function () {
