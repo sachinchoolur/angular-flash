@@ -68,7 +68,7 @@
             <h3><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span
                 class="octicon octicon-link"></span></a>Demo</h3>
             <p>Flash message for AngularJS and Bootstrap.</p>
-            <flash-message duration="5000" show-close="true"></flash-message>
+            <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash);"></flash-message>
             <button class="btn btn-success" ng-click="success()">Success</button>
             <button class="btn btn-info" ng-click="info()">Info</button>
             <button class="btn btn-warning" ng-click="warning()">Warning</button>
@@ -117,8 +117,6 @@ var myApp = angular.module("app", ["ngFlash"]);</pre>
             <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span></span> directive in your
                 HTML.</p>
             <pre class="prettyprint linenums">
-                <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash);"></flash-message>
-
 &lt;flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" &gt;&lt;/flash-message&gt;
 // 5000ms as the default duration to show flash message.
 // Show the close button (x on the right).
