@@ -1,4 +1,4 @@
-describe('Unit testing angular flash', function() {
+describe('Unit testing Angular Flash', function() {
     var $compile,
         $rootScope,
         $timeout,
@@ -22,12 +22,12 @@ describe('Unit testing angular flash', function() {
         node = $compile('<div><flash-message duration=1000></flash-message></div>')($rootScope);
     });
 
-    it('Replaces the element with the appropriate content', function() {
+    it('replaces the element with the appropriate content', function() {
         var contents = node.contents();
         expect(contents[0].nodeType).toEqual(Node.ELEMENT_NODE);
     });
 
-    it('Has the class specified', function() {
+    it('has the class specified', function() {
         var testClassName = 'test-class';
         Flash.create('success', 'Good job', 10000, testClassName);
         $rootScope.$digest();
@@ -35,7 +35,7 @@ describe('Unit testing angular flash', function() {
         expect(contents.querySelectorAll('.alert')[0].classList).toContain(testClassName);
     });
 
-    it('Shows the flash when created and removes when deleted', function() {
+    it('shows the flash when created and removes when deleted', function() {
         Flash.create('success', 'All good');
         $rootScope.$digest();
         var contents = node.contents()[0];
@@ -45,7 +45,7 @@ describe('Unit testing angular flash', function() {
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });
 
-    it('Clears all when clear is called', function() {
+    it('clears all when clear is called', function() {
         for (var i = 0; i < 10; ++i) {
             Flash.create('success', 'All good');
         }
@@ -57,7 +57,7 @@ describe('Unit testing angular flash', function() {
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });
 
-    it('Is dismissed after timeout', function() {
+    it('is dismissed after timeout', function() {
         Flash.create('success', 'All good', 10000);
         $rootScope.$digest();
         var contents = node.contents()[0];
@@ -67,4 +67,36 @@ describe('Unit testing angular flash', function() {
         $rootScope.$digest();
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });
+
+    describe('close button', function () {
+        it('is shown by default', function() {
+            Flash.create('success', 'All good');
+            $rootScope.$digest();
+            var contents = node.contents()[0];
+            expect(contents.querySelectorAll('.close')[0].classList.contains('ng-hide')).toEqual(false);
+        });
+
+        it('can be hidden with directive parameter', function() {
+            node = $compile('<div><flash-message show-close="false"></flash-message></div>')($rootScope);
+            Flash.create('success', 'All good');
+            $rootScope.$digest();
+            var contents = node.contents()[0];
+            expect(contents.querySelectorAll('.close')[0].classList.contains('ng-hide')).toEqual(true);
+        });
+
+        it('can be hidden with create function parameter', function() {
+            Flash.create('success', 'All good', 0, '', false);
+            $rootScope.$digest();
+            var contents = node.contents()[0];
+            expect(contents.querySelectorAll('.close')[0].classList.contains('ng-hide')).toEqual(true);
+        });
+
+        it('can be overriden with create function parameter', function() {
+            node = $compile('<div><flash-message show-close="false"></flash-message></div>')($rootScope);
+            Flash.create('success', 'All good', 0, '', true);
+            $rootScope.$digest();
+            var contents = node.contents()[0];
+            expect(contents.querySelectorAll('.close')[0].classList.contains('ng-hide')).toEqual(false);
+        });
+    })
 });

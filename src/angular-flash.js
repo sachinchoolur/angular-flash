@@ -44,11 +44,13 @@ app.directive('flashMessage', [
         return {
             restrict: 'E',
             scope: {
-                duration: '=duration'
+                duration: '=duration',
+                showClose: '=showClose'
             },
-            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
+            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
             link: function(scope, ele, attrs) {
                 Flash.setDefaultTimeout(scope.duration);
+                Flash.setShowClose(scope.showClose);
             }
         };
     }
@@ -56,15 +58,19 @@ app.directive('flashMessage', [
 
 app.factory('Flash', [
     '$rootScope', '$timeout', function($rootScope, $timeout) {
-        let dataFactory = {};
+        const dataFactory = {};
         let counter = 0;
         dataFactory.setDefaultTimeout = function(timeout) {
+            if (typeof timeout !== 'number') return;
             dataFactory.defaultTimeout = timeout;
         };
-        dataFactory.getDefaultTimeout = function() {
-            return dataFactory.defaultTimeout;
+
+        dataFactory.defaultShowClose = true;
+        dataFactory.setShowClose = function(value) {
+            if (typeof value !== 'boolean') return;
+            dataFactory.defaultShowClose = value;
         };
-        dataFactory.create = function(type, text, timeout, addClass) {
+        dataFactory.create = function(type, text, timeout, addClass, showClose) {
             let $this, flash;
             $this = this;
             flash = {
@@ -73,6 +79,9 @@ app.factory('Flash', [
                 addClass: addClass,
                 id: counter++
             };
+            flash.showClose =
+                typeof showClose !== 'undefined' ?
+                    showClose : dataFactory.defaultShowClose;
             if (dataFactory.defaultTimeout && typeof timeout === 'undefined') {
                 flash.timeout = dataFactory.defaultTimeout;
             }
@@ -85,6 +94,7 @@ app.factory('Flash', [
                     $this.dismiss(id);
                 }, flash.timeout, true, flash.id);
             }
+            return flash.id;
         };
         dataFactory.pause = function(index) {
             if ($rootScope.flashes[index].timeoutObj) {
@@ -101,7 +111,7 @@ app.factory('Flash', [
         };
         dataFactory.clear = function() {
             while ($rootScope.flashes.length > 0) {
-                dataFactory.dismiss(0);
+                dataFactory.dismiss($rootScope.flashes[0].id);
             }
         };
         dataFactory.reset = dataFactory.clear;
@@ -110,6 +120,7 @@ app.factory('Flash', [
                 return flash.id === id;
             });
         }
+
         return dataFactory;
     }
 ]);

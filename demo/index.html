@@ -68,7 +68,7 @@
             <h3><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span
                 class="octicon octicon-link"></span></a>Demo</h3>
             <p>Flash message for AngularJS and Bootstrap.</p>
-            <flash-message duration="5000"></flash-message>
+            <flash-message duration="5000" show-close="true"></flash-message>
             <button class="btn btn-success" ng-click="success()">Success</button>
             <button class="btn btn-info" ng-click="info()">Info</button>
             <button class="btn btn-warning" ng-click="warning()">Warning</button>
@@ -117,18 +117,19 @@ var myApp = angular.module("app", ["ngFlash"]);</pre>
             <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span></span> directive in your
                 HTML.</p>
             <pre class="prettyprint linenums">
-&lt;flash-message duration="5000"&gt;&lt;/flash-message&gt;
-// 5000ms as the default duration to show flash message.</pre>
+&lt;flash-message duration="5000" show-close="true" &gt;&lt;/flash-message&gt;
+// 5000ms as the default duration to show flash message and show the close button (x on the right). </pre>
             <p>Inject the <span class="atv">Flash</span> factory in your controller</p>
 <pre class="prettyprint linenums">
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
   $scope.successAlert = function () {
     var message = '&lt;strong&gt; Well done!&lt;/strong&gt;  You successfully read this important alert message.';
-    Flash.create('success', message, 0, 'custom-class');
-    // First argument is the type of the flash alert
-    // Second argument is the message displays in the flash alert (HTML ok)
+    Flash.create('success', message, 0, 'custom-class', true);
+    // First argument is the type of the flash alert.
+    // Second argument is the message displays in the flash alert (HTML is ok).
     // Third argument (optional) is the duration of showing the flash. 0 to not automatically hide flash (user needs to click the cross on top-right corner).
-    // Fourth argument (optional) is the custom class to be added for the flash message created
+    // Fourth argument (optional) is the custom class to be added for the flash message created.
+    // Fifth argument (optional) is the visibility of close button for this flash.
   }
 }]);</pre>
 
@@ -151,10 +152,8 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
                 These methods are mostly for internal usage but can be used also from outside.
             </p>
                 <pre class="prettyprint linenums">
-Flash.pause(4);
-// Pause the fifth flash' auto dismiss.
 Flash.dismiss(1);
-// Dismiss the second flash shown
+// Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()
                 </pre>
         </div>
 

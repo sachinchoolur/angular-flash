@@ -57,6 +57,7 @@
     "karma": "^0.13.19",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.6",
     "load-grunt-tasks": "^2.0.0",
     "time-grunt": "^1.0.0"

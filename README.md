@@ -45,8 +45,8 @@ var myApp = angular.module("app", ["ngFlash"])
 ```
 Include directive below in your HTML template.
 ```html
-<flash-message duration="5000"></flash-message> 
-<!-- 5000ms as the default duration to show flash message.
+<flash-message duration="5000" show-close="true"></flash-message> 
+<!-- 5000ms as the default duration to show flash message and show the close button (x on the right). 
 -->
 ```
 Inject the `Flash` factory in your controller
@@ -54,11 +54,12 @@ Inject the `Flash` factory in your controller
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
     $scope.successAlert = function () {
         var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-        Flash.create('success', message, 0, 'custom-class');
-        // First argument is the type of the flash alert
-        // Second argument is the message displays in the flash alert (HTML ok)
+        Flash.create('success', message, 0, 'custom-class', true);
+        // First argument is the type of the flash alert.
+        // Second argument is the message displays in the flash alert (HTML is ok).
         // Third argument (optional) is the duration of showing the flash. 0 to not automatically hide flash (user needs to click the cross on top-right corner).
-        // Fourth argument (optional) is the custom class to be added for the flash message created
+        // Fourth argument (optional) is the custom class to be added for the flash message created.
+        // Fifth argument (optional) is the visibility of close button for this flash.
     }
 }]);
 ```
@@ -72,10 +73,8 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
 These methods are mostly for internal usage but can be used also from outside.
 
 ``` javascript
-Flash.pause(4);
-// Pause the fifth flash' auto dismiss.
 Flash.dismiss(1);
-// Dismiss the second flash shown
+// Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()
 ```
 #### [Guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
 
