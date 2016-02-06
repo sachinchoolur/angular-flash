@@ -1,9 +1,9 @@
-/*! angular-flash - v2.1.0 - 2016-02-06
+/*! angular-flash - v2.2.0 - 2016-02-06
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 'use strict';
 
-/*! angular-flash - v2.1.0 - 2016-02-05
+/*! angular-flash - v2.2.0 - 2016-02-06
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -54,6 +54,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
                 if (typeof scope.onDismiss !== 'function') return;
                 scope.onDismiss({ flash: flash });
             }
+
             Flash.setOnDismiss(onDismiss);
         }
     };
