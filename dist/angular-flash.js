@@ -1,4 +1,4 @@
-/*! angular-flash - v2.1.0 - 2016-02-05
+/*! angular-flash - v2.1.0 - 2016-02-06
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 'use strict';
@@ -42,11 +42,20 @@ app.directive('flashMessage', ['Flash', function (Flash) {
     return {
         restrict: 'E',
         scope: {
-            duration: '=duration'
+            duration: '=',
+            showClose: '=',
+            onDismiss: '&'
         },
-        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div></div>',
+        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
+            Flash.setShowClose(scope.showClose);
+            function onDismiss(flash) {
+                if (typeof scope.onDismiss !== 'function') return;
+                scope.onDismiss({flash: flash});
+            }
+
+            Flash.setOnDismiss(onDismiss);
         }
     };
 }]);
@@ -55,21 +64,30 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     var dataFactory = {};
     var counter = 0;
     dataFactory.setDefaultTimeout = function (timeout) {
+        if (typeof timeout !== 'number') return;
         dataFactory.defaultTimeout = timeout;
     };
-    dataFactory.getDefaultTimeout = function () {
-        return dataFactory.defaultTimeout;
+
+    dataFactory.defaultShowClose = true;
+    dataFactory.setShowClose = function(value) {
+        if (typeof value !== 'boolean') return;
+        dataFactory.defaultShowClose = value;
     };
-    dataFactory.create = function (type, text, timeout, addClass) {
+    dataFactory.setOnDismiss = function(callback) {
+        if (typeof callback !== 'function') return;
+        dataFactory.onDismiss = callback;
+    };
+    dataFactory.create = function(type, text, timeout, config, showClose) {
         var $this = undefined,
             flash = undefined;
         $this = this;
         flash = {
             type: type,
             text: text,
-            addClass: addClass,
+            config: config,
             id: counter++
         };
+        flash.showClose = typeof showClose !== 'undefined' ? showClose : dataFactory.defaultShowClose;
         if (dataFactory.defaultTimeout && typeof timeout === 'undefined') {
             flash.timeout = dataFactory.defaultTimeout;
         } else if (timeout) {
@@ -81,6 +99,7 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
                 $this.dismiss(id);
             }, flash.timeout, true, flash.id);
         }
+        return flash.id;
     };
     dataFactory.pause = function (index) {
         if ($rootScope.flashes[index].timeoutObj) {
@@ -90,14 +109,18 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     dataFactory.dismiss = function (id) {
         var index = findIndexById(id);
         if (index !== -1) {
+            var flash = $rootScope.flashes[index];
             dataFactory.pause(index);
             $rootScope.flashes.splice(index, 1);
             $rootScope.$digest();
+            if (typeof dataFactory.onDismiss === 'function') {
+                dataFactory.onDismiss(flash);
+            }
         }
     };
     dataFactory.clear = function () {
         while ($rootScope.flashes.length > 0) {
-            dataFactory.dismiss(0);
+            dataFactory.dismiss($rootScope.flashes[0].id);
         }
     };
     dataFactory.reset = dataFactory.clear;
@@ -106,6 +129,7 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
             return flash.id === id;
         });
     }
+
     return dataFactory;
 }]);
 //# sourceMappingURL=angular-flash.js.map
