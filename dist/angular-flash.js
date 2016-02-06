@@ -1,4 +1,4 @@
-/*! angular-flash - v2.1.0 - 2016-02-05
+/*! angular-flash - v2.1.0 - 2016-02-06
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 'use strict';
@@ -44,7 +44,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
         scope: {
             duration: '=duration'
         },
-        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div></div>',
+        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
         }

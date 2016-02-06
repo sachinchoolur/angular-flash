@@ -46,7 +46,7 @@ app.directive('flashMessage', [
             scope: {
                 duration: '=duration'
             },
-            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut "> <span dynamic="flash.text"></span> <button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div></div>',
+            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" class="alert {{flash.addClass}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><button type="button" class="close" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <span dynamic="flash.text"></span> </div></div>',
             link: function(scope, ele, attrs) {
                 Flash.setDefaultTimeout(scope.duration);
             }

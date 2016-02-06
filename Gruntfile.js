@@ -5,6 +5,8 @@ module.exports = function (grunt) {
     // Show elapsed time at the end
     require('time-grunt')(grunt);
 
+    grunt.loadNpmTasks('grunt-bootlint');
+
     var distPath = 'dist/';
     // Project configuration.
     grunt.initConfig({
@@ -93,11 +95,18 @@ module.exports = function (grunt) {
                     port: 9000
                 }
             }
+        },
+        bootlint: {
+            options: {
+                stoponerror: false,
+                relaxerror: ['E001', 'W001', 'W002', 'W003', 'W005']
+            },
+            files: ['src/angular-flash.js']
         }
     });
 
     // Default task.
-    grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('lint', ['jshint', 'bootlint']);
     grunt.registerTask('default', ['babel', 'lint', 'connect', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('serve', ['connect', 'watch']);
     grunt.registerTask('test', ['lint', 'connect']);
