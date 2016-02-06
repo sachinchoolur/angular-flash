@@ -75,17 +75,9 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            gruntfile: {
-                files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
-            },
             src: {
-                files: '<%= jshint.src.src %>',
-                tasks: ['jshint:src', 'qunit']
-            },
-            test: {
-                files: '<%= jshint.test.src %>',
-                tasks: ['jshint:test', 'qunit']
+                files: ['Gruntfile.js', 'src/*.*'],
+                tasks: ['default']
             }
         },
         connect: {
