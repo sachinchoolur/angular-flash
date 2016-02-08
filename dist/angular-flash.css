@@ -95,12 +95,12 @@
   filter: alpha(opacity=50);
   opacity: .5;
 }
-button.close {
+div.close {
   -webkit-appearance: none;
   padding: 0;
   cursor: pointer;
   background: transparent;
-  border: 0;
+  font-size: 1.7em;
 }
 .sr-only {
   position: absolute;
