@@ -1,4 +1,4 @@
-/*! angular-flash - v2.2.0 - 2016-02-06
+/*! angular-flash - v2.2.0 - 2016-02-10
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 .alert {
@@ -100,6 +100,7 @@ div.close {
   padding: 0;
   cursor: pointer;
   background: transparent;
+  border: 0;
   font-size: 1.7em;
 }
 .sr-only {
