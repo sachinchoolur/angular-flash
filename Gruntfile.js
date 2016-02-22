@@ -30,10 +30,6 @@ module.exports = function (grunt) {
             ' Licensed MIT */\n',
         // Task configuration.
         concat: {
-            options: {
-                banner: '<%= banner %>',
-                stripBanners: true
-            },
             basic: {
               src: [distPath + 'angular-flash.js'],
               dest: distPath + 'angular-flash.js'

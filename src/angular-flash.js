@@ -1,4 +1,4 @@
-/*! angular-flash - v2.2.0 - 2016-02-06
+/*! angular-flash - v2.2.1 - 2016-02-06
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -101,9 +101,9 @@ app.factory('Flash', [
             }
             $rootScope.flashes.push(flash);
             if (flash.timeout) {
-                flash.timeoutObj = $timeout(function(id) {
-                    $this.dismiss(id);
-                }, flash.timeout, true, flash.id);
+                flash.timeoutObj = $timeout(function() {
+                    $this.dismiss(flash.id);
+                }, flash.timeout);
             }
             return flash.id;
         };
