@@ -1,6 +1,6 @@
 'use strict';
 
-/*! angular-flash - v2.2.0 - 2016-02-06
+/*! angular-flash - v2.2.1 - 2016-02-06
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -43,7 +43,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
             showClose: '=',
             onDismiss: '&'
         },
-        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div></div>',
+        template: '<div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
             Flash.setShowClose(scope.showClose);
@@ -92,7 +92,7 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
         }
         $rootScope.flashes.push(flash);
         if (flash.timeout) {
-            flash.timeoutObj = $timeout(function (id) {
+            flash.timeoutObj = $timeout(function () {
                 $this.dismiss(flash.id);
             }, flash.timeout);
         }

@@ -73,13 +73,28 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
 + warning
 + danger
 
-#### Methods ####
+#### Methods
 These methods are mostly for internal usage but can be used also from outside.
 
 ``` javascript
 Flash.dismiss(1);
 // Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()
 ```
+
+#### Animating
+You can animate the flash messages via traditional Angular way by including _ngAnimate_ as a dependency of your application and then defining the CSS transitions for different classes (_ng-enter_, _ng-move_, _ng-leave_) provided by Angular.
+
+Example:
+```
+.alert.ng-leave {
+  opacity: 1;
+  transition: opacity 1.5s ease-out;
+}
+.alert.ng-leave-active {
+  opacity: 0;
+}
+```
+
 #### [Guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
 
 #### Running tests
