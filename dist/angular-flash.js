@@ -1,6 +1,6 @@
 'use strict';
 
-/*! angular-flash - v2.2.1 - 2016-02-06
+/*! angular-flash - v2.2.4 - 2016-03-05
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
 
