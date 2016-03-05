@@ -1,6 +1,6 @@
 {
   "name": "angular-flash-alert",
-    "version": "2.2.3",
+  "version": "2.2.3",
   "description": "Flash message for AngularJS and Bootstrap",
   "keywords": [
     "angular-flash",
@@ -20,7 +20,7 @@
     "email": "sachi77n@gmail.com",
     "url": "https://github.com/sachinchoolur"
   },
-    "contributors": [
+  "contributors": [
     {
       "name": "Roope Hakulinen",
       "email": "roope.hakulinen@gmail.com",
@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git@github.com:sachinchoolur/angular-flash.git"
   },
-  "main": "dist/angular-flash.js",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "grunt"
