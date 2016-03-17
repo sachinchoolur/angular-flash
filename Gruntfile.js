@@ -6,6 +6,7 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
     grunt.loadNpmTasks('grunt-bootlint');
+    grunt.loadNpmTasks('grunt-banner');
 
     var distPath = 'dist/';
     // Project configuration.
@@ -90,12 +91,24 @@ module.exports = function (grunt) {
                 relaxerror: ['E001', 'W001', 'W002', 'W003', 'W005']
             },
             files: ['src/angular-flash.js']
+        },
+        usebanner: {
+            taskName: {
+                options: {
+                    position: 'top',
+                    banner: '<%= banner %>',
+                    linebreak: true
+                },
+                files: {
+                    src: ['dist/*.css', 'dist/*.js']
+                }
+            }
         }
     });
 
     // Default task.
     grunt.registerTask('lint', ['jshint', 'bootlint']);
-    grunt.registerTask('default', ['babel', 'lint', 'connect', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['babel', 'lint', 'connect', 'concat', 'uglify', 'cssmin', 'usebanner']);
     grunt.registerTask('serve', ['connect', 'watch']);
     grunt.registerTask('test', ['lint', 'connect']);
 };

@@ -1,8 +1,8 @@
-'use strict';
-
-/*! angular-flash - v2.2.4 - 2016-03-05
+/*! angular-flash - v2.2.5 - 2016-03-17
  * https://github.com/sachinchoolur/angular-flash
  * Copyright (c) 2016 Sachin; Licensed MIT */
+
+'use strict';
 
 var app = angular.module('ngFlash', []);
 
@@ -122,9 +122,9 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     };
     dataFactory.reset = dataFactory.clear;
     function findIndexById(id) {
-        return $rootScope.flashes.findIndex(function (flash) {
-            return flash.id === id;
-        });
+        return $rootScope.flashes.map(function(flash) {
+            return flash.id;
+        }).indexOf(id);
     }
 
     return dataFactory;

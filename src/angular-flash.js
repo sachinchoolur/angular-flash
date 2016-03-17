@@ -1,7 +1,3 @@
-/*! angular-flash - v2.2.1 - 2016-02-06
- * https://github.com/sachinchoolur/angular-flash
- * Copyright (c) 2016 Sachin; Licensed MIT */
-
 const app = angular.module('ngFlash', []);
 
 app.run([
@@ -131,9 +127,7 @@ app.factory('Flash', [
         };
         dataFactory.reset = dataFactory.clear;
         function findIndexById(id) {
-            return $rootScope.flashes.findIndex((flash) => {
-                return flash.id === id;
-            });
+            return $rootScope.flashes.map((flash) => flash.id).indexOf(id);
         }
 
         return dataFactory;
