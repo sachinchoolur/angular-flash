@@ -114,7 +114,6 @@ app.factory('Flash', [
                 const flash = $rootScope.flashes[index];
                 dataFactory.pause(index);
                 $rootScope.flashes.splice(index, 1);
-                $rootScope.$digest();
                 if (typeof dataFactory.onDismiss === 'function') {
                     dataFactory.onDismiss(flash);
                 }

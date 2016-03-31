@@ -1,6 +1,6 @@
 {
   "name": "angular-flash-alert",
-    "version": "2.2.6",
+  "version": "2.2.7",
   "description": "Flash message for AngularJS and Bootstrap",
   "keywords": [
     "angular-flash",
