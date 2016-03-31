@@ -1,4 +1,4 @@
-/*! angular-flash - v2.2.6 - 2016-03-27
+/*! angular-flash - v2.2.7 - 2016-03-31
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -109,7 +109,6 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
             var flash = $rootScope.flashes[index];
             dataFactory.pause(index);
             $rootScope.flashes.splice(index, 1);
-            $rootScope.$digest();
             if (typeof dataFactory.onDismiss === 'function') {
                 dataFactory.onDismiss(flash);
             }
