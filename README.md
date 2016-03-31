@@ -81,6 +81,11 @@ Flash.dismiss(1);
 // Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()
 ```
 
+``` javascript
+Flash.clear();
+// Dismisses all flashes shown.
+```
+
 #### Animating
 You can animate the flash messages via traditional Angular way by including _ngAnimate_ as a dependency of your application and then defining the CSS transitions for different classes (_ng-enter_, _ng-move_, _ng-leave_) provided by Angular.
 
