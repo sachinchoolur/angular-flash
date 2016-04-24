@@ -6,14 +6,12 @@
 A simple lightweight flash message module for AngularJS and Bootstrap.﻿
 
 
-Demo
-----------------
+## Demo
 [angular-flash](http://sachinchoolur.github.io/angular-flash/) | [jsfiddle](http://jsfiddle.net/roopehakulinen/uxeg4nze/) | [codepen](http://codepen.io/RoopeHakulinen/pen/QyZjxm)
 
 
 
-How to use 
----
+## Install
 
 #### npm
 
@@ -45,13 +43,61 @@ var myApp = angular.module("app", ["ngFlash"])
 ```
 Include directive below in your HTML template.
 ```html
-<flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash);"></flash-message> 
+<flash-message></flash-message> 
+```
+
+## Configure
+You can configure angular-flash by two ways:
+
+Add attributes on the `<flash-message>` directive.
+```html
+<flash-message
+    duration="5000"
+    show-close="true"
+    on-dismiss="myCallback(flash);"
+></flash-message> 
 <!-- 
 5000ms as the default duration to show flash message.
 Show the close button (x on the right).
 Call myCallback with flash dismissed as parameter when flash has been dismissed.
 -->
 ```
+
+Set configuration with `flashProvider`.
+```javascript
+app.config((FlashProvider) => {
+    FlashProvider.setTimeout(5000);
+    FlashProvider.setShowClose(true);
+    FlashProvider.setOnDismiss(myCallback);
+});
+```
+
+#### Use a custom template
+
+By default, angular-flash use the Bootstrap flash standard template, but you can set your own template.
+
+**By giving it in the Js**: use `.setTemplate(...)` with the template in parameter.
+```javascript
+app.config((FlashProvider) => {
+    FlashProvider.setTemplate(`
+        <div class="my-flash">{{ flash.text }}</div>
+    `);
+});
+```
+
+**By giving it in the HTML**: use `.setTemplatePreset('transclude')` with the template transcluded in the `<flash-message>` directive.
+```javascript
+app.config((FlashProvider) => {
+    FlashProvider.setTemplatePreset('transclude');
+});
+```
+```html
+<flash-message>
+    <div class="my-flash">{{ flash.text }}</div>
+</flash-message>
+```
+
+## How to use
 Inject the `Flash` factory in your controller
 ```javascript
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
