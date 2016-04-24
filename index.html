@@ -101,8 +101,8 @@
         </div>
         <div class="section">
             <h3>
-                <a id="howToUse" class="anchor" href="#howToUse" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>How to use angular-flash?</h3>
+                <a id="install" class="anchor" href="#install" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>Install angular-flash</h3>
             <p>Add the following code to the &lt;head&gt; of your document.</p>
                 <pre class="prettyprint linenums">
 &lt;link type="text/css" rel="stylesheet" href="dist/angular-flash.min.css" /&gt;
@@ -117,11 +117,62 @@ var myApp = angular.module("app", ["ngFlash"]);</pre>
             <p>Include <span style="font-size:13px;"><span class="atn">flash-message</span></span> directive in your
                 HTML.</p>
             <pre class="prettyprint linenums">
-&lt;flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" &gt;&lt;/flash-message&gt;
+&lt;flash-message&gt;&lt;/flash-message&gt;</pre>
+        </div>
+
+        <div class="section">
+            <h3>
+                <a id="configure" class="anchor" href="#configure" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>Configure</h3>
+                    <p>You can configure angular-flash by two ways:</p>
+
+                    <p>Add attributes on the <i>&lt;flash-message&gt;</i> directive.</p>
+            <pre class="prettyprint linenums">
+&lt;flash-message
+    duration="5000"
+    show-close="true"
+    on-dismiss="myCallback(flash)"
+&gt;&lt;/flash-message&gt;
 // 5000ms as the default duration to show flash message.
 // Show the close button (x on the right).
-// Call myCallback with flash dismissed as parameter when flash has been dismissed.
-            </pre>
+// Call myCallback with flash dismissed as parameter when flash has been dismissed.</pre>
+
+                    <p>Set configuration with <i>flashProvider</i>.</p>
+            <pre class="prettyprint linenums">
+app.config((FlashProvider) => {
+    FlashProvider.setTimeout(5000);
+    FlashProvider.setShowClose(true);
+    FlashProvider.setOnDismiss(myCallback);
+});</pre>
+
+            <h4>
+                <a id="custom-template" class="anchor" href="#custom-template" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>Use a custom template</h4>
+<p>By default, angular-flash use the Bootstrap flash standard template, but you can set your own template.</p>
+
+<p><strong>By giving it in the Js</strong>: use <i>.setTemplate(...)</i> with the template in parameter.</p>
+<pre class="prettyprint linenums">
+app.config((FlashProvider) => {
+    FlashProvider.setTemplate(`
+        <div class="my-flash">{{ flash.text }}</div>
+    `);
+});</pre>
+
+<p><strong>By giving it in the HTML</strong>: use <i>.setTemplatePreset('transclude')</i> with the template transcluded in the <i>&lt;flash-message&gt;</i> directive.</p>
+<pre class="prettyprint linenums">
+app.config((FlashProvider) => {
+    FlashProvider.setTemplatePreset('transclude');
+});</pre>
+<pre class="prettyprint linenums">
+&lt;flash-message&gt;
+    &lt;div class="my-flash"&gt;{{ flash.text }}&lt;/div&gt;
+&lt;/flash-message&gt;</pre>
+        </div>
+
+        <div class="section">
+            <h3>
+                <a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>How to use</h3>
             <p>Inject the <span class="atv">Flash</span> factory in your controller</p>
 <pre class="prettyprint linenums">
 myApp.controller('demoCtrl', ['Flash', function(Flash) {
