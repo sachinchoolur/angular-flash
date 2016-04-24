@@ -157,6 +157,7 @@ npm install
 #### Contributors
 * [Sachin Choluur](https://github.com/sachinchoolur) (Original author)
 * [Roope Hakulinen](https://github.com/RoopeHakulinen) (Version 2)
+* [Nicolas Coden](https://github.com/ncoden)
 
 #### License
 MIT © [Sachin Choluur](https://twitter.com/sachinchoolur)

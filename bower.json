@@ -3,7 +3,9 @@
     "version": "2.3.0",
     "homepage": "https://github.com/sachinchoolur/angular-flash",
     "authors": [
-        "Sachin N <sachi77n@gmail.com>"
+        "Sachin N <sachi77n@gmail.com>",
+        "Roope Hakulinen <roope.hakulinen@gmail.com>",
+        "Nicolas Coden <nicolas@ncoden.fr>"
     ],
     "description": "Flash messages for AngularJS and Bootstrap",
     "main": ["dist/angular-flash.js", "dist/angular-flash.css"],
