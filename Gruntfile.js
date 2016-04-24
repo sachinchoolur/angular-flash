@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                banner: '<%= banner %>'
+                sourceMap: true
             },
             dist: {
                 src: distPath + 'angular-flash.js',
