@@ -1,4 +1,4 @@
-/*! angular-flash - v2.3.0 - 2016-08-23
+/*! angular-flash - v2.4.0 - 2016-10-25
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -52,7 +52,8 @@ app.directive('flashMessage', ['Flash', function (Flash) {
         scope: {
             duration: '=',
             showClose: '=',
-            onDismiss: '&'
+            onDismiss: '&',
+            name: '@'
         },
         link: function link(scope, ele, attrs, ctrl, transclude) {
             Flash.setTimeout(scope.duration);
@@ -69,7 +70,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
             }
         },
         transclude: Flash.config.templateTransclude,
-        template: '\n                <div ng-repeat="flash in $root.flashes track by $index">\n                    ' + Flash.config.template + '\n                </div>\n            '
+        template: '\n                <div ng-repeat="flash in $root.flashes track by $index" ng-if="flash.config.container === name" class="alert-container">\n                    ' + Flash.config.template + '\n                </div>\n            '
     };
 }]);
 

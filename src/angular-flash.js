@@ -74,7 +74,7 @@ app.directive('flashMessage', [
             },
             transclude: Flash.config.templateTransclude,
             template: `
-                <div ng-repeat="flash in $root.flashes track by $index" ng-if="flash.config.container === name">
+                <div ng-repeat="flash in $root.flashes track by $index" ng-if="flash.config.container === name" class="alert-container">
                     ` + Flash.config.template + `
                 </div>
             `
