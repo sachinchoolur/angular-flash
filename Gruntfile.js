@@ -66,7 +66,8 @@ module.exports = function (grunt) {
             },
             gruntfile: {
                 options: {
-                    jshintrc: '.jshintrc'
+                    jshintrc: '.jshintrc',
+                    reporterOutput: ''
                 },
                 src: 'Gruntfile.js'
             }
