@@ -27,6 +27,14 @@ describe('Unit testing Angular Flash', function() {
         expect(contents[0].nodeType).toEqual(Node.ELEMENT_NODE);
     });
 
+    it('avoid to display flash when it does not have content', function() {
+        created = Flash.create('success', '');
+        $rootScope.$digest();
+        var contents = node.contents()[0];
+        expect(contents.querySelectorAll('.alert').length).toEqual(0);
+        expect(created).toEqual(false);
+    });
+
     it('has the class specified', function() {
         var testClassName = 'test-class';
         Flash.create('success', 'Good job', 10000, {class: testClassName});

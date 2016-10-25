@@ -1,4 +1,4 @@
-/*! angular-flash - v2.3.0 - 2016-04-24
+/*! angular-flash - v2.3.0 - 2016-08-23
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -124,6 +124,7 @@ app.provider('Flash', function () {
         dataFactory.config = defaultConfig;
 
         dataFactory.create = function (type, text, timeout, config, showClose) {
+            if (!text) return false;
             var $this = void 0,
                 flash = void 0;
             $this = this;

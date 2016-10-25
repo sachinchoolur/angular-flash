@@ -142,6 +142,7 @@ app.provider('Flash', function() {
         dataFactory.config = defaultConfig;
 
         dataFactory.create = function(type, text, timeout, config, showClose) {
+            if (!text) return false;
             let $this, flash;
             $this = this;
             flash = {
