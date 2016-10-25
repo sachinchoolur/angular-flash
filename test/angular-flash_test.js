@@ -76,6 +76,42 @@ describe('Unit testing Angular Flash', function() {
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });
 
+    describe('show flashes in designated containers', function() {
+        var containers;
+
+        beforeEach(function() {
+            containers = $compile(
+                '<flash-message duration=1000></flash-message>' +
+                '<flash-message duration=1000 name="flash-container-a"></flash-message>' +
+                '<flash-message duration=1000 name="flash-container-b"></flash-message>')($rootScope);
+
+            Flash.create('success', 'All good');
+            Flash.create('success', 'All good - A', 0, { container: 'flash-container-a'});
+            Flash.create('success', 'All good - B', 0, { container: 'flash-container-b'});
+
+            $rootScope.$digest();
+        });
+
+        it('only shows default alert in default container', function() {
+            expect(containers[0].querySelectorAll('.alert').length).toEqual(1);
+            expect(containers[0].outerHTML).toContain('All good');
+            expect(containers[0].outerHTML).not.toContain('All good - A');
+            expect(containers[0].outerHTML).not.toContain('All good - B');
+        });
+
+        it('only shows alert A in container A', function() {
+            expect(containers[1].querySelectorAll('.alert').length).toEqual(1);
+            expect(containers[1].outerHTML).toContain('All good - A');
+            expect(containers[1].outerHTML).not.toContain('All good - B');
+        });
+
+        it('only shows alert B in container B', function() {
+            expect(containers[2].querySelectorAll('.alert').length).toEqual(1);
+            expect(containers[2].outerHTML).toContain('All good - B');
+            expect(containers[2].outerHTML).not.toContain('All good - A');
+        });
+    });
+
     describe('close button', function () {
         it('is shown by default', function() {
             Flash.create('success', 'All good');

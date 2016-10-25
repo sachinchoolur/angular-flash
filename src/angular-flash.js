@@ -55,7 +55,8 @@ app.directive('flashMessage', [
             scope: {
                 duration: '=',
                 showClose: '=',
-                onDismiss: '&'
+                onDismiss: '&',
+                name: '@'
             },
             link: function(scope, ele, attrs, ctrl, transclude) {
                 Flash.setTimeout(scope.duration);
@@ -73,7 +74,7 @@ app.directive('flashMessage', [
             },
             transclude: Flash.config.templateTransclude,
             template: `
-                <div ng-repeat="flash in $root.flashes track by $index">
+                <div ng-repeat="flash in $root.flashes track by $index" ng-if="flash.config.container === name">
                     ` + Flash.config.template + `
                 </div>
             `

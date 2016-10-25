@@ -146,6 +146,17 @@ Example:
 }
 ```
 
+#### Multiple flash containers
+
+You can send flashes to different containers by naming them and specifying their name in the config you pass to the `Flash.create` function.
+
+```html
+<flash-message name="flash-fixed"></flash-message>
+```
+```js
+Flash.create('success', 'Hooray!', 0, {container: 'flash-fixed'});
+```
+
 #### [Guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
 
 #### Running tests
