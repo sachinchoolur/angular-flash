@@ -7,11 +7,11 @@
     <meta name="description" content="Angular-flash : Flash message for angularjs">
 
     <link rel="stylesheet" type="text/css"
-          href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.css">
+          href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/prettify.css">
 
-    <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="//assets-cdn.github.com/favicon.ico">
     <link rel="stylesheet" type="text/css" href="dist/angular-flash.css">
 
     <title>Angular-flash</title>
@@ -49,7 +49,7 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }
         }(document, 'script', 'twitter-wjs');</script>
-        <iframe src="https://ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star" frameborder="0"
+        <iframe src="//ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star" frameborder="0"
                 scrolling="0" width="170px" height="20px"></iframe>
 
         <section id="downloads">
@@ -109,8 +109,7 @@
 // If you are using bootstrap v3 no need to include angular-flash.min.css
 &lt;script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"&gt;&lt;/script&gt;
 &lt;script src="dist/angular-flash.min.js"&gt;&lt;/script&gt;
-// Do not include both angular-flash.js and angular-flash.min.js
-    </pre>
+// Do not include both angular-flash.js and angular-flash.min.js</pre>
             <p>Add <span class="atv">ngFlash</span> dependency to your module</p>
             <pre class="prettyprint linenums">
 var myApp = angular.module("app", ["ngFlash"]);</pre>
@@ -208,12 +207,22 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
             </p>
                 <pre class="prettyprint linenums">
 Flash.dismiss(1);
-// Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()
-                </pre>
+// Dismiss the flash with id of 1. Id is not the index of flash but instead a value returned by Flash.create()</pre>
                 <pre class="prettyprint linenums">
 Flash.clear();
-// Dismisses all flashes shown.
-                </pre>
+// Dismisses all flashes shown.</pre>
+        </div>
+
+        <div class="section">
+            <h3><a id="multiple-flash-containers" class="anchor" href="#multiple-flash-containers" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>Multiple flash containers</h3>
+            <p>
+                You can send flashes to different containers by naming them and specifying their name in the config you pass to the <i>Flash.create</i> function.
+            </p>
+            <pre class="prettyprint linenums">
+&lt;flash-message name="flash-fixed"&gt;&lt;/flash-message&gt; </pre>
+            <pre class="prettyprint linenums">
+Flash.create('success', 'Hooray!', 0, {container: 'flash-fixed'});</pre>
         </div>
 
         <div class="section">
@@ -292,7 +301,7 @@ var myApp = angular.module("app", ["ngFlash", "ngAnimate"]);
                     fjs.parentNode.insertBefore(js, fjs);
                 }
             }(document, 'script', 'twitter-wjs');</script>
-            <iframe src="https://ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star"
+            <iframe src="//ghbtns.com/github-btn.html?user=sachinchoolur&repo=angular-flash&type=star"
                     frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
 
         </div>
@@ -300,10 +309,10 @@ var myApp = angular.module("app", ["ngFlash", "ngAnimate"]);
 
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.js"></script>
 <script type="text/javascript" src="javascripts/main.js"></script>
 <script type="text/javascript" src="dist/angular-flash.js"></script>
 <script type="text/javascript" src="javascripts/prettify.js"></script>
