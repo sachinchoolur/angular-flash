@@ -77,9 +77,10 @@ describe('Unit testing Angular Flash', function() {
         Flash.create('success', 'All good', 10000);
         $rootScope.$digest();
         var contents = node.contents()[0];
+        $interval.flush(3000);
         expect(contents.querySelectorAll('.alert').length).toEqual(1);
 
-        $interval.flush();
+        $interval.flush(10000);
         $rootScope.$digest();
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });

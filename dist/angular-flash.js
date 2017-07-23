@@ -1,6 +1,6 @@
-/*! angular-flash - v2.4.0 - 2016-11-07
+/*! angular-flash - v2.5.0 - 2017-07-23
 * https://github.com/sachinchoolur/angular-flash
-* Copyright (c) 2016 Sachin; Licensed MIT */
+* Copyright (c) 2017 Sachin; Licensed MIT */
 
 'use strict';
 
@@ -110,6 +110,7 @@ app.provider('Flash', function () {
         if (typeof callback !== 'function') return;
         defaultConfig.onDismiss = callback;
     };
+
     this.setAutoDismiss = function (dismiss) {
         if (typeof dismiss !== 'boolean') return;
         defaultConfig.autoDismiss = dismiss;
@@ -130,7 +131,7 @@ app.provider('Flash', function () {
         dataFactory.config = defaultConfig;
 
         dataFactory.create = function (type, text, timeout, config, showClose) {
-            if($rootScope.flashes.length === 1 && defaultConfig.autoDismiss){
+            if ($rootScope.flashes.length === 1 && defaultConfig.autoDismiss) {
                 dataFactory.dismiss($rootScope.flashes[0].id);
             }
             if (!text) return false;
