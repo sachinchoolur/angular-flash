@@ -32,7 +32,7 @@ $.fn.putCursorAtEnd = function () {
 
 // Demo controller
 var app = angular.module('demoApp', ['ngFlash', 'ngAnimate']);
-app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', function ($rootScope, $scope, Flash, $timeout) {
+app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$interval', function ($rootScope, $scope, Flash, $interval) {
     $scope.success = function () {
         var message = '<strong>Well done!</strong> You successfully read this important alert message.';
         Flash.create('success', message);
@@ -138,10 +138,10 @@ app.controller('FlashDemoCtrl', ['$rootScope', '$scope', 'Flash', '$timeout', fu
     $('#newList').on('keypress', function (e) {
         if ($(this).val() !== '') {
             if (e.which == 13) {
-                $timeout(function () {
+                $interval(function () {
                     $scope.add();
                     return false;
-                }, 100);
+                }, 100, 1);
             }
         }
     });

@@ -1,7 +1,7 @@
 describe('Unit testing Angular Flash', function() {
     var $compile,
         $rootScope,
-        $timeout,
+        $interval,
         node,
         Flash;
 
@@ -10,11 +10,11 @@ describe('Unit testing Angular Flash', function() {
 
     // Store references to $rootScope and $compile
     // so they are available to all tests in this describe block
-    beforeEach(inject(function(_$compile_, _$rootScope_, _$timeout_, _Flash_) {
+    beforeEach(inject(function(_$compile_, _$rootScope_, _$interval_, _Flash_) {
         // The injector unwraps the underscores (_) from around the parameter names when matching
         $compile = _$compile_;
         $rootScope = _$rootScope_;
-        $timeout = _$timeout_;
+        $interval = _$interval_;
         Flash = _Flash_;
     }));
 
@@ -79,7 +79,7 @@ describe('Unit testing Angular Flash', function() {
         var contents = node.contents()[0];
         expect(contents.querySelectorAll('.alert').length).toEqual(1);
 
-        $timeout.flush();
+        $interval.flush();
         $rootScope.$digest();
         expect(contents.querySelectorAll('.alert').length).toEqual(0);
     });

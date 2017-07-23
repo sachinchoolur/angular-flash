@@ -1,4 +1,4 @@
-/*! angular-flash - v2.4.0 - 2016-10-25
+/*! angular-flash - v2.4.0 - 2016-11-07
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
 
@@ -115,7 +115,7 @@ app.provider('Flash', function () {
     this.setShowClose(true);
     this.setTemplatePreset('bootstrap');
 
-    this.$get = ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+    this.$get = ['$rootScope', '$interval', function ($rootScope, $interval) {
         var dataFactory = {};
         var counter = 0;
 
@@ -143,15 +143,15 @@ app.provider('Flash', function () {
             }
             $rootScope.flashes.push(flash);
             if (flash.timeout) {
-                flash.timeoutObj = $timeout(function () {
+                flash.timeoutObj = $interval(function () {
                     $this.dismiss(flash.id);
-                }, flash.timeout);
+                }, flash.timeout, 1);
             }
             return flash.id;
         };
         dataFactory.pause = function (index) {
             if ($rootScope.flashes[index].timeoutObj) {
-                $timeout.cancel($rootScope.flashes[index].timeoutObj);
+                $interval.cancel($rootScope.flashes[index].timeoutObj);
             }
         };
         dataFactory.dismiss = function (id) {

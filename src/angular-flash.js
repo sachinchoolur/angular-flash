@@ -132,7 +132,7 @@ app.provider('Flash', function() {
     this.setShowClose(true);
     this.setTemplatePreset('bootstrap');
 
-    this.$get = ['$rootScope', '$timeout', function($rootScope, $timeout) {
+    this.$get = ['$rootScope', '$interval', function($rootScope, $interval) {
         const dataFactory = {};
         let counter = 0;
 
@@ -162,15 +162,15 @@ app.provider('Flash', function() {
             }
             $rootScope.flashes.push(flash);
             if (flash.timeout) {
-                flash.timeoutObj = $timeout(function() {
+                flash.timeoutObj = $interval(function() {
                     $this.dismiss(flash.id);
-                }, flash.timeout);
+                }, flash.timeout, 1);
             }
             return flash.id;
         };
         dataFactory.pause = function(index) {
             if ($rootScope.flashes[index].timeoutObj) {
-                $timeout.cancel($rootScope.flashes[index].timeoutObj);
+                $interval.cancel($rootScope.flashes[index].timeoutObj);
             }
         };
         dataFactory.dismiss = function(id) {
