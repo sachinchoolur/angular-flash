@@ -160,9 +160,12 @@ Flash.create('success', 'Hooray!', 0, {container: 'flash-fixed'});
 #### [Guidelines for contributors](https://github.com/sachinchoolur/angular-flash/blob/master/contributing.md)
 
 #### Running tests
+You'll need relatively new versions of Firefox and Chrome installed on your local system to run the tests.
+
+Once you do, run:
 ```
 npm install
-./node_modules/karma/bin/karma start
+npm run test
 ```
 
 #### Contributors
