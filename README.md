@@ -113,7 +113,7 @@ myApp.controller('demoCtrl', ['Flash', function(Flash) {
     }
 }]);
 ```
-####Flash types####
+#### Flash types ####
 + success
 + info
 + warning
