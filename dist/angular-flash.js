@@ -110,10 +110,15 @@ app.provider('Flash', function () {
         if (typeof callback !== 'function') return;
         defaultConfig.onDismiss = callback;
     };
+    this.setAutoDismiss = function (dismiss) {
+        if (typeof dismiss !== 'boolean') return;
+        defaultConfig.autoDismiss = dismiss;
+    };
 
     this.setTimeout(5000);
     this.setShowClose(true);
     this.setTemplatePreset('bootstrap');
+    this.setAutoDismiss(false);
 
     this.$get = ['$rootScope', '$interval', function ($rootScope, $interval) {
         var dataFactory = {};
@@ -125,6 +130,9 @@ app.provider('Flash', function () {
         dataFactory.config = defaultConfig;
 
         dataFactory.create = function (type, text, timeout, config, showClose) {
+            if($rootScope.flashes.length === 1 && defaultConfig.autoDismiss){
+                dataFactory.dismiss($rootScope.flashes[0].id);
+            }
             if (!text) return false;
             var $this = void 0,
                 flash = void 0;
